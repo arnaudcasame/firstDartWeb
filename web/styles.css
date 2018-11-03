@@ -88,3 +88,7 @@ a, span.heart{
     color: forestgreen;
     font-weight: bold;
 }
+
+span#todos-number{
+    float: right;
+}

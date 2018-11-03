@@ -5,6 +5,7 @@ ButtonElement bouton = querySelector('#bouton');
 InputElement input = querySelector('input[type=text]');
 UListElement listHolder = querySelector("#output");
 ElementList<CheckboxInputElement> check = querySelectorAll('input[type=checkbox]');
+SpanElement todosNumber = querySelector("#todos-number");
 
 List<Map<String, dynamic>> todoList = [
   { "text": "Dart Basics and IDE", "done": true},
@@ -42,6 +43,7 @@ void addItemToList(Map<String, dynamic> todo){
   todoItem.append(yesOrNo);
   todoItem.append(span);
   listHolder.children.add(todoItem);
+  todosNumber.text = "${(todoList.length).toString()} todos";
 }
 
 void updateUi(List<Map<String, dynamic>> array){
@@ -70,6 +72,7 @@ void addTodoItemToList(Event e){
     "text": input.value,
     "done": false
   };
+
   todoList.add(map);
   addItemToList(map);
   input.value = '';
