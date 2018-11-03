@@ -78,3 +78,13 @@ input[type=text]{
     font-size: 1em;
     outline-color: lightgreen;
 }
+
+footer{
+    margin-top: 70px;
+    text-align: center;
+}
+
+a, span.heart{
+    color: forestgreen;
+    font-weight: bold;
+}
