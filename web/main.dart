@@ -6,12 +6,13 @@ InputElement input = querySelector('input[type=text]');
 UListElement listHolder = querySelector("#output");
 ElementList<CheckboxInputElement> check = querySelectorAll('input[type=checkbox]');
 
-//List<Map<String, dynamic>> todoList = [
-//  { "text": "Dart Basics and IDE", "no": 1},
-//  { "text": "Types in Dart", "no": 2 },
-//  { "text": "Variables in Dart", "no": 3 },
-//  { "text": "Built-in types in Dart", "no": 4 }
-//];
+List<Map<String, dynamic>> todoList = [
+  { "text": "Dart Basics and IDE", "done": true},
+  { "text": "Important concepts", "done": false },
+  { "text": "Keywords in Dart", "done": false },
+  { "text": "Variables in Dart", "done": false },
+  { "text": "Built-in types in Dart", "done": false }
+];
 
 List<String> todoList = ["Dart Basics and IDE", "Types in Dart", "Variables in Dart", "Built-in types in Dart"];
 
@@ -22,19 +23,28 @@ void main() {
   check.onChange.listen(onCheckToDo);
 }
 
-void addItemToList(String text){
+void addItemToList(Map<String, dynamic> todo){
   LIElement todoItem = new LIElement();
   CheckboxInputElement yesOrNo = new CheckboxInputElement();
   SpanElement span = new SpanElement();
   yesOrNo.onChange.listen(onCheckToDo);
-  span.text = text;
+
+  if(todo["done"]){
+    yesOrNo.checked = true;
+    span.style.textDecoration = 'line-through';
+    span.style.color = 'crimson';
+    todoItem.style.borderColor = 'crimson';
+  }
+
+
+  span.text = todo['text'];
   span.style.marginLeft = '20px';
   todoItem.append(yesOrNo);
   todoItem.append(span);
   listHolder.children.add(todoItem);
 }
 
-void updateUi(List<String> array){
+void updateUi(List<Map<String, dynamic>> array){
   num len = array.length;
   for(var i=0; i<len; i++){
     addItemToList(array[i]);
@@ -56,7 +66,12 @@ void inputOnChange(Event e){
 }
 
 void addTodoItemToList(Event e){
-  addItemToList(input.value);
+  Map<String, dynamic> map = {
+    "text": input.value,
+    "done": false
+  };
+  todoList.add(map);
+  addItemToList(map);
   input.value = '';
   bouton.disabled = true;
 }
