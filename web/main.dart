@@ -47,10 +47,11 @@ void addItemToList(Map<String, dynamic> todo){
 }
 
 void updateUi(List<Map<String, dynamic>> array){
-  num len = array.length;
-  for(var i=0; i<len; i++){
-    addItemToList(array[i]);
-  }
+  array.forEach((todo) => addItemToList(todo));
+//  num len = array.length;
+//  for(var i=0; i<len; i++){
+//    addItemToList(array[i]);
+//  }
 }
 
 void inputOnChange(Event e){
